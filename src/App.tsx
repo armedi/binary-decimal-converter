@@ -2,8 +2,10 @@ import { Binary, Hash } from "lucide-react";
 import { useState, KeyboardEvent, ChangeEvent } from "react";
 
 function App() {
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
+  const [binaryInput, setBinaryInput] = useState("");
+  const [decimalInput, setDecimalInput] = useState("");
+  const [binaryResult, setBinaryResult] = useState("");
+  const [decimalResult, setDecimalResult] = useState("");
   const [integerExplanation, setIntegerExplanation] = useState<string[]>([]);
   const [fractionalExplanation, setFractionalExplanation] = useState<string[]>([]);
   const [conversionType, setConversionType] = useState<
@@ -26,9 +28,9 @@ function App() {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (conversionType === "binaryToDecimal") {
-      setInput(validateBinaryInput(newValue));
+      setBinaryInput(validateBinaryInput(newValue));
     } else {
-      setInput(validateDecimalInput(newValue));
+      setDecimalInput(validateDecimalInput(newValue));
     }
   };
 
@@ -137,9 +139,11 @@ function App() {
 
   const handleConvert = () => {
     if (conversionType === "binaryToDecimal") {
-      setResult(convertBinaryToDecimal(input));
+      const result = convertBinaryToDecimal(binaryInput);
+      setDecimalResult(result);
     } else {
-      setResult(convertDecimalToBinary(parseFloat(input)));
+      const result = convertDecimalToBinary(parseFloat(decimalInput));
+      setBinaryResult(result);
     }
   };
 
@@ -147,6 +151,12 @@ function App() {
     if (e.key === "Enter") {
       handleConvert();
     }
+  };
+
+  const handleConversionTypeChange = (type: "binaryToDecimal" | "decimalToBinary") => {
+    setConversionType(type);
+    // Do not clear inputs or results to preserve state
+    // Do not clear explanations to preserve state
   };
 
   return (
@@ -166,7 +176,7 @@ function App() {
                   ? "bg-slate-600 text-white"
                   : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
-              onClick={() => setConversionType("binaryToDecimal")}
+              onClick={() => handleConversionTypeChange("binaryToDecimal")}
             >
               <Binary className="mr-2" size={18} />
               <span>Binary to Decimal</span>
@@ -177,7 +187,7 @@ function App() {
                   ? "bg-slate-600 text-white"
                   : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
-              onClick={() => setConversionType("decimalToBinary")}
+              onClick={() => handleConversionTypeChange("decimalToBinary")}
             >
               <Hash className="mr-2" size={18} />
               <span>Decimal to Binary</span>
@@ -196,7 +206,7 @@ function App() {
             type="text"
             id="input"
             className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
-            value={input}
+            value={conversionType === "binaryToDecimal" ? binaryInput : decimalInput}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             placeholder={
@@ -212,10 +222,12 @@ function App() {
         >
           Convert
         </button>
-        {result && (
+        {(binaryResult || decimalResult) && (
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2 text-slate-700">Result:</h2>
-            <p className="bg-slate-100 p-3 rounded text-lg text-slate-700">{result}</p>
+            <p className="bg-slate-100 p-3 rounded text-lg text-slate-700">
+              {conversionType === "binaryToDecimal" ? decimalResult : binaryResult}
+            </p>
           </div>
         )}
         {(integerExplanation.length > 0 || fractionalExplanation.length > 0) && (
