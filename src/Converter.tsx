@@ -17,23 +17,6 @@ const Converter = ({
     return Math.round(num * factor) / factor;
   };
 
-  const validateBinaryInput = (value: string): string => {
-    return value.replace(/[^01.]/g, "");
-  };
-
-  const validateDecimalInput = (value: string): string => {
-    return value.replace(/[^0-9.]/g, "");
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setInput(
-      mode === "binaryToDecimal"
-        ? validateBinaryInput(newValue)
-        : validateDecimalInput(newValue)
-    );
-  };
-
   const convertBinaryToDecimal = (binary: string): string => {
     const parts = binary.split(".");
     let decimal = 0;
@@ -156,13 +139,20 @@ const Converter = ({
     return binary;
   };
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setInput(
+      mode === "binaryToDecimal"
+        ? newValue.replace(/[^01.]/g, "")
+        : newValue.replace(/[^0-9.]/g, "")
+    );
+  };
+
   const handleConvert = () => {
     if (mode === "binaryToDecimal") {
-      const result = convertBinaryToDecimal(input);
-      setResult(result);
+      setResult(convertBinaryToDecimal(input));
     } else {
-      const result = convertDecimalToBinary(parseFloat(input));
-      setResult(result);
+      setResult(convertDecimalToBinary(parseFloat(input)));
     }
   };
 
