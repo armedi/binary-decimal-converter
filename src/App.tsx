@@ -138,26 +138,26 @@ function App() {
           </label>
           <div className="flex justify-center space-x-4">
             <button
-              className={`px-4 py-2 rounded-full transition-colors duration-200 ${
+              className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
                 conversionType === "binaryToDecimal"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
               onClick={() => setConversionType("binaryToDecimal")}
             >
-              <Binary className="inline-block mr-2" size={18} />
-              Binary to Decimal
+              <Binary className="mr-2" size={18} />
+              <span>Binary to Decimal</span>
             </button>
             <button
-              className={`px-4 py-2 rounded-full transition-colors duration-200 ${
+              className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
                 conversionType === "decimalToBinary"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
               onClick={() => setConversionType("decimalToBinary")}
             >
-              <Hash className="inline-block mr-2" size={18} />
-              Decimal to Binary
+              <Hash className="mr-2" size={18} />
+              <span>Decimal to Binary</span>
             </button>
           </div>
         </div>
