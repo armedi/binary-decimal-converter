@@ -127,21 +127,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
-        <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
+        <h1 className="text-3xl font-bold mb-6 text-center text-slate-700">
           Binary-Decimal Converter
         </h1>
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-600 mb-2">
             Conversion Type
           </label>
           <div className="flex justify-center space-x-4">
             <button
               className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
                 conversionType === "binaryToDecimal"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-slate-600 text-white"
+                  : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
               onClick={() => setConversionType("binaryToDecimal")}
             >
@@ -151,8 +151,8 @@ function App() {
             <button
               className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
                 conversionType === "decimalToBinary"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-slate-600 text-white"
+                  : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
               onClick={() => setConversionType("decimalToBinary")}
             >
@@ -164,7 +164,7 @@ function App() {
         <div className="mb-6">
           <label
             htmlFor="input"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-slate-600 mb-2"
           >
             Enter {conversionType === "binaryToDecimal" ? "Binary" : "Decimal"}{" "}
             Number
@@ -172,7 +172,7 @@ function App() {
           <input
             type="text"
             id="input"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
@@ -183,26 +183,26 @@ function App() {
           />
         </div>
         <button
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200"
+          className="w-full bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50 transition-colors duration-200"
           onClick={handleConvert}
         >
           Convert
         </button>
         {result && (
           <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-2 text-blue-600">Result:</h2>
-            <p className="bg-gray-100 p-3 rounded text-lg">{result}</p>
+            <h2 className="text-xl font-semibold mb-2 text-slate-700">Result:</h2>
+            <p className="bg-slate-100 p-3 rounded text-lg text-slate-700">{result}</p>
           </div>
         )}
         {(integerExplanation.length > 0 || fractionalExplanation.length > 0) && (
           <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-4 text-blue-600">
+            <h2 className="text-xl font-semibold mb-4 text-slate-700">
               Step-by-step Explanation:
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-100 p-4 rounded">
-                <h3 className="font-semibold mb-2 text-blue-500">Integer Part</h3>
-                <ol className="list-decimal list-inside">
+              <div className="bg-slate-100 p-4 rounded">
+                <h3 className="font-semibold mb-2 text-slate-600">Integer Part</h3>
+                <ol className="list-decimal list-inside text-slate-700">
                   {integerExplanation.map((step, index) => (
                     <li key={index} className="mb-1">
                       {step}
@@ -211,9 +211,9 @@ function App() {
                 </ol>
               </div>
               {fractionalExplanation.length > 0 && (
-                <div className="bg-gray-100 p-4 rounded">
-                  <h3 className="font-semibold mb-2 text-blue-500">Fractional Part</h3>
-                  <ol className="list-decimal list-inside">
+                <div className="bg-slate-100 p-4 rounded">
+                  <h3 className="font-semibold mb-2 text-slate-600">Fractional Part</h3>
+                  <ol className="list-decimal list-inside text-slate-700">
                     {fractionalExplanation.map((step, index) => (
                       <li key={index} className="mb-1">
                         {step}
