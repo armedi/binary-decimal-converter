@@ -164,31 +164,33 @@ const Converter = ({
 
   return (
     <>
-      <div className="mb-6">
-        <label
-          htmlFor="input"
-          className="block text-sm font-medium text-slate-600 mb-2"
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="flex-grow">
+          <label
+            htmlFor="input"
+            className="block text-sm font-medium text-slate-600 mb-2"
+          >
+            Enter {mode === "binaryToDecimal" ? "Binary" : "Decimal"} Number
+          </label>
+          <input
+            type="text"
+            id="input"
+            className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder={
+              mode === "binaryToDecimal" ? "e.g., 1010.11" : "e.g., 10.75"
+            }
+          />
+        </div>
+        <button
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-6 rounded-full hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-all duration-300 shadow-md self-end"
+          onClick={handleConvert}
         >
-          Enter {mode === "binaryToDecimal" ? "Binary" : "Decimal"} Number
-        </label>
-        <input
-          type="text"
-          id="input"
-          className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder={
-            mode === "binaryToDecimal" ? "e.g., 1010.11" : "e.g., 10.75"
-          }
-        />
+          Convert
+        </button>
       </div>
-      <button
-        className="w-full bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50 transition-colors duration-200"
-        onClick={handleConvert}
-      >
-        Convert
-      </button>
       {result && (
         <div className="mt-6">
           <h2 className="text-xl font-semibold mb-2 text-slate-700">Result:</h2>
