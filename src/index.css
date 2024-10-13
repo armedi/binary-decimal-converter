@@ -21,16 +21,28 @@
 .converter-front,
 .converter-back {
   backface-visibility: hidden;
-  position: relative;
   width: 100%;
   border-radius: 1rem;
+  transition: position 0s 0.3s; /* Add a delay to the position change */
+}
+
+.converter-front {
+  position: relative;
 }
 
 .converter-back {
-  transform: rotateY(180deg);
   position: absolute;
   top: 0;
   left: 0;
+  transform: rotateY(180deg);
+}
+
+.converter-flipper.flipped .converter-front {
+  position: absolute;
+}
+
+.converter-flipper.flipped .converter-back {
+  position: relative;
 }
 
 /* Add a subtle shadow effect */
