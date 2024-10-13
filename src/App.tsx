@@ -1,5 +1,5 @@
 import { Binary, Hash } from "lucide-react";
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 
 function App() {
   const [input, setInput] = useState("");
@@ -126,6 +126,12 @@ function App() {
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleConvert();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
@@ -175,6 +181,7 @@ function App() {
             className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={
               conversionType === "binaryToDecimal"
                 ? "e.g., 1010.11"
