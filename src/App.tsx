@@ -19,12 +19,16 @@ function App() {
     return value.replace(/[^01.]/g, '');
   };
 
+  const validateDecimalInput = (value: string): string => {
+    return value.replace(/[^0-9.]/g, '');
+  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (conversionType === "binaryToDecimal") {
       setInput(validateBinaryInput(newValue));
     } else {
-      setInput(newValue);
+      setInput(validateDecimalInput(newValue));
     }
   };
 
