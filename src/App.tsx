@@ -1,6 +1,5 @@
-import { Binary, Hash } from "lucide-react";
 import { useState } from "react";
-
+import { Binary, Hash } from "lucide-react";
 import Converter from "./Converter";
 
 function App() {
@@ -8,46 +7,54 @@ function App() {
     "binaryToDecimal" | "decimalToBinary"
   >("binaryToDecimal");
 
+  const handleConversionTypeChange = (type: "binaryToDecimal" | "decimalToBinary") => {
+    setConversionType(type);
+  };
+
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
-        <h1 className="text-3xl font-bold mb-6 text-center text-slate-700">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center py-12 px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-4xl">
+        <h1 className="text-4xl font-bold mb-8 text-center text-slate-800 animate-fade-in">
           Binary-Decimal Converter
         </h1>
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-slate-600 mb-2">
+        <div className="mb-8">
+          <label className="block text-sm font-medium text-slate-600 mb-3">
             Conversion Type
           </label>
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center space-x-6">
             <button
-              className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
+              className={`mode-selection-button flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
                 conversionType === "binaryToDecimal"
-                  ? "bg-slate-600 text-white"
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
                   : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
-              onClick={() => setConversionType("binaryToDecimal")}
+              onClick={() => handleConversionTypeChange("binaryToDecimal")}
             >
-              <Binary className="mr-2" size={18} />
+              <Binary className="mr-3" />
               <span>Binary to Decimal</span>
             </button>
             <button
-              className={`flex items-center px-4 py-2 rounded-full transition-colors duration-200 ${
+              className={`mode-selection-button flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
                 conversionType === "decimalToBinary"
-                  ? "bg-slate-600 text-white"
+                  ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-md"
                   : "bg-slate-200 hover:bg-slate-300 text-slate-700"
               }`}
-              onClick={() => setConversionType("decimalToBinary")}
+              onClick={() => handleConversionTypeChange("decimalToBinary")}
             >
-              <Hash className="mr-2" size={18} />
+              <Hash className="mr-3" />
               <span>Decimal to Binary</span>
             </button>
           </div>
         </div>
-        <div className={conversionType !== "binaryToDecimal" ? "hidden" : ""}>
-          <Converter mode="binaryToDecimal" />
-        </div>
-        <div className={conversionType !== "decimalToBinary" ? "hidden" : ""}>
-          <Converter mode="decimalToBinary" />
+        <div className="flip-container">
+          <div className={`flipper ${conversionType === "decimalToBinary" ? "flip" : ""}`}>
+            <div className="front bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl shadow-inner">
+              <Converter mode="binaryToDecimal" />
+            </div>
+            <div className="back bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl shadow-inner">
+              <Converter mode="decimalToBinary" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
