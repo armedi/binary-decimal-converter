@@ -6,8 +6,13 @@ function App() {
   const [decimalInput, setDecimalInput] = useState("");
   const [binaryResult, setBinaryResult] = useState("");
   const [decimalResult, setDecimalResult] = useState("");
-  const [integerExplanation, setIntegerExplanation] = useState<string[]>([]);
-  const [fractionalExplanation, setFractionalExplanation] = useState<string[]>([]);
+  
+  // Separate explanation states for each mode
+  const [binaryIntegerExplanation, setBinaryIntegerExplanation] = useState<string[]>([]);
+  const [binaryFractionalExplanation, setBinaryFractionalExplanation] = useState<string[]>([]);
+  const [decimalIntegerExplanation, setDecimalIntegerExplanation] = useState<string[]>([]);
+  const [decimalFractionalExplanation, setDecimalFractionalExplanation] = useState<string[]>([]);
+
   const [conversionType, setConversionType] = useState<
     "binaryToDecimal" | "decimalToBinary"
   >("binaryToDecimal");
@@ -68,8 +73,8 @@ function App() {
     intSteps.push(`Sum of integer values: ${Math.floor(decimal)}`);
     if (parts[1]) fracSteps.push(`Sum of fractional values: ${roundToDecimalPlaces(decimal - Math.floor(decimal), 5)}`);
     
-    setIntegerExplanation(intSteps);
-    setFractionalExplanation(fracSteps);
+    setBinaryIntegerExplanation(intSteps);
+    setBinaryFractionalExplanation(fracSteps);
     return roundToDecimalPlaces(decimal, 5).toString();
   };
 
@@ -132,8 +137,8 @@ function App() {
     intSteps.push(`Final binary result (integer part): ${binary.split('.')[0]}`);
     if (fracPart > 0) fracSteps.push(`Final binary result (fractional part): ${binary.split('.')[1] || ''}`);
     
-    setIntegerExplanation(intSteps);
-    setFractionalExplanation(fracSteps);
+    setDecimalIntegerExplanation(intSteps);
+    setDecimalFractionalExplanation(fracSteps);
     return binary;
   };
 
@@ -230,33 +235,63 @@ function App() {
             </p>
           </div>
         )}
-        {(integerExplanation.length > 0 || fractionalExplanation.length > 0) && (
+        {(binaryIntegerExplanation.length > 0 || binaryFractionalExplanation.length > 0 || decimalIntegerExplanation.length > 0 || decimalFractionalExplanation.length > 0) && (
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-4 text-slate-700">
               Step-by-step Explanation:
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-slate-100 p-4 rounded">
-                <h3 className="font-semibold mb-2 text-slate-600">Integer Part</h3>
-                <ol className="list-decimal list-inside text-slate-700">
-                  {integerExplanation.map((step, index) => (
-                    <li key={index} className="mb-1">
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              {fractionalExplanation.length > 0 && (
-                <div className="bg-slate-100 p-4 rounded">
-                  <h3 className="font-semibold mb-2 text-slate-600">Fractional Part</h3>
-                  <ol className="list-decimal list-inside text-slate-700">
-                    {fractionalExplanation.map((step, index) => (
-                      <li key={index} className="mb-1">
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+              {conversionType === "binaryToDecimal" && (
+                <>
+                  <div className="bg-slate-100 p-4 rounded">
+                    <h3 className="font-semibold mb-2 text-slate-600">Integer Part</h3>
+                    <ol className="list-decimal list-inside text-slate-700">
+                      {binaryIntegerExplanation.map((step, index) => (
+                        <li key={index} className="mb-1">
+                          {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  {binaryFractionalExplanation.length > 0 && (
+                    <div className="bg-slate-100 p-4 rounded">
+                      <h3 className="font-semibold mb-2 text-slate-600">Fractional Part</h3>
+                      <ol className="list-decimal list-inside text-slate-700">
+                        {binaryFractionalExplanation.map((step, index) => (
+                          <li key={index} className="mb-1">
+                            {step}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                </>
+              )}
+              {conversionType === "decimalToBinary" && (
+                <>
+                  <div className="bg-slate-100 p-4 rounded">
+                    <h3 className="font-semibold mb-2 text-slate-600">Integer Part</h3>
+                    <ol className="list-decimal list-inside text-slate-700">
+                      {decimalIntegerExplanation.map((step, index) => (
+                        <li key={index} className="mb-1">
+                          {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  {decimalFractionalExplanation.length > 0 && (
+                    <div className="bg-slate-100 p-4 rounded">
+                      <h3 className="font-semibold mb-2 text-slate-600">Fractional Part</h3>
+                      <ol className="list-decimal list-inside text-slate-700">
+                        {decimalFractionalExplanation.map((step, index) => (
+                          <li key={index} className="mb-1">
+                            {step}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
