@@ -1,5 +1,5 @@
 import { Binary, Hash } from "lucide-react";
-import { useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, ChangeEvent } from "react";
 
 function App() {
   const [input, setInput] = useState("");
@@ -13,6 +13,19 @@ function App() {
   const roundToDecimalPlaces = (num: number, decimalPlaces: number): number => {
     const factor = Math.pow(10, decimalPlaces);
     return Math.round(num * factor) / factor;
+  };
+
+  const validateBinaryInput = (value: string): string => {
+    return value.replace(/[^01.]/g, '');
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (conversionType === "binaryToDecimal") {
+      setInput(validateBinaryInput(newValue));
+    } else {
+      setInput(newValue);
+    }
   };
 
   const convertBinaryToDecimal = (binary: string): string => {
@@ -180,7 +193,7 @@ function App() {
             id="input"
             className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 text-slate-700"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             placeholder={
               conversionType === "binaryToDecimal"
