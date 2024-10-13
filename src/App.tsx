@@ -17,10 +17,7 @@ function App() {
         <h1 className="text-4xl font-bold mb-8 text-center text-slate-800 animate-fade-in">
           Binary-Decimal Converter
         </h1>
-        <div className="mb-8">
-          <label className="block text-sm font-medium text-slate-600 mb-3">
-            Conversion Type
-          </label>
+        <div className="mt-12 mb-8">
           <div className="flex justify-center space-x-6">
             <button
               className={`mode-selection-button flex items-center px-6 py-3 rounded-full transition-all duration-300 ${
