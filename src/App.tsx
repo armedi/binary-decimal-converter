@@ -46,12 +46,12 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="flip-container">
-          <div className={`flipper ${conversionType === "decimalToBinary" ? "flip" : ""}`}>
-            <div className="front bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl shadow-inner">
+        <div className="converter-container">
+          <div className={`converter-flipper ${conversionType === "decimalToBinary" ? "flipped" : ""}`}>
+            <div className="converter-front bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl shadow-inner">
               <Converter mode="binaryToDecimal" />
             </div>
-            <div className="back bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl shadow-inner">
+            <div className="converter-back bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl shadow-inner">
               <Converter mode="decimalToBinary" />
             </div>
           </div>

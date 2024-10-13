@@ -2,53 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-.flip-container {
+.converter-container {
   perspective: 1000px;
   width: 100%;
-  height: 400px;
 }
 
-.flipper {
-  transition: 0.6s;
+.converter-flipper {
+  transition: transform 0.6s;
   transform-style: preserve-3d;
   position: relative;
   width: 100%;
-  height: 100%;
 }
 
-.flipper.flip {
+.converter-flipper.flipped {
   transform: rotateY(180deg);
 }
 
-.front, .back {
+.converter-front,
+.converter-back {
   backface-visibility: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.converter-back {
+  transform: rotateY(180deg);
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  overflow: hidden;
 }
 
-.front {
-  z-index: 2;
-  transform: rotateY(0deg);
+/* Add a subtle shadow effect */
+.converter-front,
+.converter-back {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
-.back {
-  transform: rotateY(180deg);
-}
-
-/* Add a subtle shadow effect during the flip */
-.flipper {
-  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
-  transition: transform 0.6s, box-shadow 0.6s;
-}
-
-/* .flipper:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-} */
 
 /* Add a smooth transition for mode selection button hover states */
 .mode-selection-button {
